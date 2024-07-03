@@ -29,7 +29,7 @@ export default function App() {
 function Body() {
   const [isOpen, setIsOpen] = useState(null);
   function handleOpen(id) {
-    setIsOpen(id);
+    setIsOpen((curId) => (curId === id ? null : id));
   }
   return (
     <div className="inner-container">
@@ -37,17 +37,19 @@ function Body() {
         <Accordion
           num={ind + 1}
           question={cur.question}
-          answer={cur.answer}
-          key={ind + 1}
-          curOpen={isOpen}
+          // answer={cur.answer}
           handleOpen={handleOpen}
-        />
+          curOpen={isOpen}
+          key={ind + 1}
+        >
+          {cur.answer}
+        </Accordion>
       ))}
     </div>
   );
 }
 
-function Accordion({ num, question, answer, curOpen, handleOpen }) {
+function Accordion({ num, question, answer, curOpen, children, handleOpen }) {
   const isOpen = curOpen === num;
 
   return (
@@ -58,7 +60,7 @@ function Accordion({ num, question, answer, curOpen, handleOpen }) {
           {isOpen ? "-" : "+"}
         </span>
       </div>
-      <div className={isOpen ? "answer" : "closeAnswer"}>{answer}</div>
+      <div className={isOpen ? "answer" : "closeAnswer"}>{children}</div>
     </div>
   );
 }
