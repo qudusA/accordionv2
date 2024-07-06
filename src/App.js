@@ -37,7 +37,6 @@ function Body() {
         <Accordion
           num={ind + 1}
           question={cur.question}
-          // answer={cur.answer}
           handleOpen={handleOpen}
           curOpen={isOpen}
           key={ind + 1}
@@ -49,7 +48,7 @@ function Body() {
   );
 }
 
-function Accordion({ num, question, answer, curOpen, children, handleOpen }) {
+function Accordion({ num, question, curOpen, children, handleOpen }) {
   const isOpen = curOpen === num;
 
   return (
